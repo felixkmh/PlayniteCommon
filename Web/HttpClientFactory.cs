@@ -11,7 +11,7 @@ namespace PlayniteCommon.Web
 {
     public class HttpClientFactory
     {
-        private static Lazy<IHttpClientFactory> httpClientFactory = new Lazy<IHttpClientFactory>(InitHttpClientFactory);
+        private static Lazy<IHttpClientFactory> httpClientFactory = new Lazy<IHttpClientFactory>(InitHttpClientFactory, LazyThreadSafetyMode.PublicationOnly);
 
 
         private static IHttpClientFactory InitHttpClientFactory()
