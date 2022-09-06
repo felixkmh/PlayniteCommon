@@ -38,7 +38,7 @@ namespace PlayniteCommon.Models
                 if (!generated)
                 {
                     generated = true;
-                    isGenerating = true;
+                    IsGenerating = true;
                     Dispatcher?.Invoke(async () =>
                     {
                         Value = await Generator();
@@ -49,7 +49,7 @@ namespace PlayniteCommon.Models
             set
             {
                 SetValue(ref _value, value);
-                isGenerating = false;
+                IsGenerating = false;
             }
         }
     }
