@@ -20,9 +20,16 @@ namespace PlayniteCommon.Models
             Dispatcher = dispatcher ?? Application.Current.Dispatcher;
         }
 
-        private T _value = default;
-
         private bool generated = false;
+
+        private bool isGenerating = false;
+        public bool IsGenerating
+        {
+            get => isGenerating;
+            set => SetValue(ref isGenerating, value);
+        }
+
+        private T _value = default;
 
         public T Value
         {
@@ -31,7 +38,8 @@ namespace PlayniteCommon.Models
                 if (!generated)
                 {
                     generated = true;
-                    Dispatcher.Invoke(async () =>
+                    isGenerating = true;
+                    Dispatcher?.Invoke(async () =>
                     {
                         Value = await Generator();
                     });
@@ -41,6 +49,7 @@ namespace PlayniteCommon.Models
             set
             {
                 SetValue(ref _value, value);
+                isGenerating = false;
             }
         }
     }
